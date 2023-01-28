@@ -1,7 +1,13 @@
 
 
 
+// $("button").on("click", function () {
+//     let city =$(this).attr("search-input");
+//     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?" + city + "&appid=394c49c0d6d4115d71f8b7b4a45917af";
 
+//     console.log(queryURL);
+
+// })
 
 
 
