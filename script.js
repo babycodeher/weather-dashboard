@@ -1,3 +1,36 @@
+// Initial array of cities
+let citiesSearch = [];
+let cityHistory = document.querySelector("#history");
+let cityInput = document.querySelector("#search-input");
+
+// Function for displaying city data
+function renderButton() {
+   
+    // Looping through array of cities
+    for (let i = 0; i < citiesSearch.length; i++) {
+        const city = citiesSearch[i];
+        
+        // generates buttons for each city in the array
+        let newButton = document.createElement("button");
+        newButton.textContent = city;
+        cityHistory.appendChild(newButton);
+    }
+}
+
+$("#search-button").on("click", function(event) {
+
+    event.preventDefault();
+    if(cityInput.value.trim() !== ""){
+        cityHistory.innerHTML = "";
+        let newCity = cityInput.value
+        citiesSearch.push(newCity);
+        cityInput.value ="";
+        renderButton();
+      }
+    
+})
+
+renderButton();
 
 // This is the .on(click) function to trigger a fetch call
 $("button").on("click", function (event) {
@@ -38,7 +71,7 @@ fetch("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appi
     // add date and time content to html
     let todaysDate = moment(data.list[0].dt, "X").format("DD/MM/YYYY HH:mm");
     // add city to html
-    $(".city").html("<h3> " + data.city.name + todaysDate, "</h3>");
+    $(".city").html("<h3> " + data.city.name + "&nbsp &nbsp" + todaysDate, "</h3>");
     // convert and add temperature content to html
     $(".temp").text("Temp: "+ (data.list[0].main.temp - 273.15).toFixed(2) + "°C");
     // add wind content to html
@@ -47,3 +80,4 @@ fetch("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appi
     $(".humidity").text("Humidity: "+ data.list[0].main.humidity + "%");
 
         })
+
