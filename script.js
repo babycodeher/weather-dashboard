@@ -17,6 +17,7 @@ function renderButton() {
     }
 }
 
+// Function handles event when the search button is clicked
 $("#search-button").on("click", function(event) {
 
     event.preventDefault();
@@ -32,35 +33,20 @@ $("#search-button").on("click", function(event) {
 
 renderButton();
 
-// This is the .on(click) function to trigger a fetch call
-$("button").on("click", function (event) {
-
-    // Prevents the submit button from trying to submit a form when clicked
-    event.preventDefault();
-
-    // Grabs a text from the input box
-    let city =$("#search-input").val();
-
-    let queryURL = "api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=394c49c0d6d4115d71f8b7b4a45917af";
-
-    console.log(queryURL.city);
-
-})
 
 
-fetch("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=394c49c0d6d4115d71f8b7b4a45917af")
-.then(response => response.json())
-.then(citiesData=> {
-    let firstCity = citiesData.city;
-    let firstCityLat = firstCity.coord.lat;
-    let firstCityLon = firstCity.coord.lon;
-    
-    console.log(firstCity.coord.lat);
-    console.log(firstCity.coord.lon);
-    console.log(firstCity);
-    
-    return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${firstCityLat}&lon=${firstCityLon}&appid=394c49c0d6d4115d71f8b7b4a45917af`);
-})
+fetch("http://api.openweathermap.org/geo/1.0/direct?q=Lagos&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af")
+    .then(response => response.json())
+    .then(citySearchData => {
+
+        let cityResult =citySearchData[0];
+        let cityLat = cityResult.lat;
+        let cityLon = cityResult.lon;
+        console.log(cityResult.lon);
+
+return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=394c49c0d6d4115d71f8b7b4a45917af`);
+       
+    })
 
 .then(response => response.json())
 .then(data => {
@@ -69,7 +55,7 @@ fetch("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appi
     
     // Transfer content to HTML
     // add date and time content to html
-    let todaysDate = moment(data.list[0].dt, "X").format("DD/MM/YYYY HH:mm");
+    let todaysDate = moment(data.list[0].dt, "X").format("DD/MM/YYYY");
     // add city to html
     $(".city").html("<h3> " + data.city.name + "&nbsp &nbsp" + todaysDate, "</h3>");
     // convert and add temperature content to html
@@ -79,5 +65,8 @@ fetch("https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appi
     // add humidity content to html
     $(".humidity").text("Humidity: "+ data.list[0].main.humidity + "%");
 
-        })
+})
+
+
+
 

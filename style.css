@@ -2,11 +2,14 @@
     justify-content: space-around;
 }
 
-#search-input {
-    width: 18rem; 
+#search-input, #search-button  {
+    width: 18rem;
+    margin-top: 10px; 
 }
 
 
-#search-button {
+.list-group {
     width: 18rem;
+   
+
 }
