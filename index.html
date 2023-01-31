@@ -26,7 +26,7 @@
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="Enter a city name here"
                 aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
                 <button type="submit" class="btn-primary search-button" id="search-button" aria-label="submit search">
@@ -48,6 +48,7 @@
           <div class="temp"></div>
           <div class="wind"></div>
           <div class="humidity"></div>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" srcset="">
         </section>
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
 
@@ -58,6 +59,8 @@
         <p class="temp1"></p>
         <p class="wind1"></p>
         <p class="humidity1"></p>
+        <p class="icon1"></p>
+        <img id="icon1" src="" alt="" srcset="">
         </div>
         </div>
 

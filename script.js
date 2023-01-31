@@ -27,15 +27,30 @@ $("#search-button").on("click", function(event) {
         citiesSearch.push(newCity);
         cityInput.value ="";
         renderButton();
+        getData(newCity);
       }
-    
+})
+
+$("#history").click(function(event) {
+    // console.log(event);
+    console.log("Event: ", event.target);
+    //console.log("This: ", $(this));
+
+    // capture the value (from the HTML element)
+    let historyCity = event.target.textContent
+    console.log(event.target.textContent)
+    // send that value to our fetch method
+    getData(historyCity)
 })
 
 renderButton();
 
+function getData(cityName) {
 
 
-fetch("http://api.openweathermap.org/geo/1.0/direct?q=Leeds&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af")
+
+
+fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af`)
     .then(response => response.json())
     .then(citySearchData => {
 
@@ -57,7 +72,7 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
     // add date and time content to html
     let todaysDate = moment(cityGeoData.list[0].dt, "X").format("DD/MM/YYYY");
     // add city to html
-    $(".city").html("<h3> " + cityGeoData.city.name + "&nbsp &nbsp" + todaysDate, "</h3>");
+    $(".city").html("<h4> " + cityGeoData.city.name + "&nbsp &nbsp" + todaysDate, "</h4>");
     // convert and add temperature content to html
     $(".temp").text("Temp: "+ (cityGeoData.list[0].main.temp - 273.15).toFixed(2) + "°C");
     // add wind content to html
@@ -71,6 +86,7 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
     $(".temp1").text("Temp: "+ (cityGeoData.list[6].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind1").text("Wind: "+ cityGeoData.list[6].wind.speed + "KPH");
     $(".humidity1").text("Humidity: "+ cityGeoData.list[6].main.humidity + "%");
+    $("#icon1").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[6].weather[0].icon}@2x.png`);
 
     // Day2 weather forecast html content
     let day2 = moment(cityGeoData.list[14].dt, "X").format("DD/MM/YYYY");
@@ -102,6 +118,6 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
 
 })
 
-
+}
 
 
