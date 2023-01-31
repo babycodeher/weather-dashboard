@@ -47,9 +47,6 @@ renderButton();
 
 function getData(cityName) {
 
-
-
-
 fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af`)
     .then(response => response.json())
     .then(citySearchData => {
@@ -71,6 +68,8 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
     // Transfer content to HTML
     // add date and time content to html
     let todaysDate = moment(cityGeoData.list[0].dt, "X").format("DD/MM/YYYY");
+    // add creent weather icon to html
+    $("#icon").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[6].weather[0].icon}@2x.png`);
     // add city to html
     $(".city").html("<h4> " + cityGeoData.city.name + "&nbsp &nbsp" + todaysDate, "</h4>");
     // convert and add temperature content to html
@@ -82,14 +81,15 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
 
     // Day1 weather forecast html content
     let day1 = moment(cityGeoData.list[6].dt, "X").format("DD/MM/YYYY");
+    $("#icon1").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[6].weather[0].icon}@2x.png`);
     $(".forecast-day1").text(day1);
     $(".temp1").text("Temp: "+ (cityGeoData.list[6].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind1").text("Wind: "+ cityGeoData.list[6].wind.speed + "KPH");
     $(".humidity1").text("Humidity: "+ cityGeoData.list[6].main.humidity + "%");
-    $("#icon1").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[6].weather[0].icon}@2x.png`);
 
     // Day2 weather forecast html content
     let day2 = moment(cityGeoData.list[14].dt, "X").format("DD/MM/YYYY");
+    $("#icon2").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[14].weather[0].icon}@2x.png`);
     $(".forecast-day2").text(day2);
     $(".temp2").text("Temp: "+ (cityGeoData.list[14].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind2").text("Wind: "+ cityGeoData.list[14].wind.speed + "KPH");
@@ -97,6 +97,7 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
     
     // Day3 weather forecast html content
     let day3 = moment(cityGeoData.list[22].dt, "X").format("DD/MM/YYYY");
+    $("#icon3").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[22].weather[0].icon}@2x.png`);
     $(".forecast-day3").text(day3);
     $(".temp3").text("Temp: "+ (cityGeoData.list[22].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind3").text("Wind: "+ cityGeoData.list[22].wind.speed + "KPH");
@@ -104,6 +105,7 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
 
     // Day4 weather forecast html content
     let day4 = moment(cityGeoData.list[30].dt, "X").format("DD/MM/YYYY");
+    $("#icon4").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[30].weather[0].icon}@2x.png`);
     $(".forecast-day4").text(day4);
     $(".temp4").text("Temp: "+ (cityGeoData.list[30].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind4").text("Wind: "+ cityGeoData.list[30].wind.speed + "KPH");
@@ -111,6 +113,7 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
 
     // Day5 weather forecast html content
     let day5 = moment(cityGeoData.list[38].dt, "X").format("DD/MM/YYYY");
+    $("#icon5").attr("src", `http://openweathermap.org/img/wn/${cityGeoData.list[38].weather[0].icon}@2x.png`);
     $(".forecast-day5").text(day5);
     $(".temp5").text("Temp: "+ (cityGeoData.list[38].main.temp - 273.15).toFixed(2) + "°C");
     $(".wind5").text("Wind: "+ cityGeoData.list[38].wind.speed + "KPH");
