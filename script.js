@@ -35,7 +35,7 @@ renderButton();
 
 
 
-fetch("http://api.openweathermap.org/geo/1.0/direct?q=Lagos&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af")
+fetch("http://api.openweathermap.org/geo/1.0/direct?q=Leeds&limit=1&appid=394c49c0d6d4115d71f8b7b4a45917af")
     .then(response => response.json())
     .then(citySearchData => {
 
@@ -49,21 +49,56 @@ return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lo
     })
 
 .then(response => response.json())
-.then(data => {
+.then(cityGeoData => {
     
-    console.log(data);
+    console.log(cityGeoData);
     
     // Transfer content to HTML
     // add date and time content to html
-    let todaysDate = moment(data.list[0].dt, "X").format("DD/MM/YYYY");
+    let todaysDate = moment(cityGeoData.list[0].dt, "X").format("DD/MM/YYYY");
     // add city to html
-    $(".city").html("<h3> " + data.city.name + "&nbsp &nbsp" + todaysDate, "</h3>");
+    $(".city").html("<h3> " + cityGeoData.city.name + "&nbsp &nbsp" + todaysDate, "</h3>");
     // convert and add temperature content to html
-    $(".temp").text("Temp: "+ (data.list[0].main.temp - 273.15).toFixed(2) + "°C");
+    $(".temp").text("Temp: "+ (cityGeoData.list[0].main.temp - 273.15).toFixed(2) + "°C");
     // add wind content to html
-    $(".wind").text("Wind: "+ data.list[0].wind.speed + "KPH");
+    $(".wind").text("Wind: "+ cityGeoData.list[0].wind.speed + "KPH");
     // add humidity content to html
-    $(".humidity").text("Humidity: "+ data.list[0].main.humidity + "%");
+    $(".humidity").text("Humidity: "+ cityGeoData.list[0].main.humidity + "%");
+
+    // Day1 weather forecast html content
+    let day1 = moment(cityGeoData.list[6].dt, "X").format("DD/MM/YYYY");
+    $(".forecast-day1").text(day1);
+    $(".temp1").text("Temp: "+ (cityGeoData.list[6].main.temp - 273.15).toFixed(2) + "°C");
+    $(".wind1").text("Wind: "+ cityGeoData.list[6].wind.speed + "KPH");
+    $(".humidity1").text("Humidity: "+ cityGeoData.list[6].main.humidity + "%");
+
+    // Day2 weather forecast html content
+    let day2 = moment(cityGeoData.list[14].dt, "X").format("DD/MM/YYYY");
+    $(".forecast-day2").text(day2);
+    $(".temp2").text("Temp: "+ (cityGeoData.list[14].main.temp - 273.15).toFixed(2) + "°C");
+    $(".wind2").text("Wind: "+ cityGeoData.list[14].wind.speed + "KPH");
+    $(".humidity2").text("Humidity: "+ cityGeoData.list[14].main.humidity + "%");
+    
+    // Day3 weather forecast html content
+    let day3 = moment(cityGeoData.list[22].dt, "X").format("DD/MM/YYYY");
+    $(".forecast-day3").text(day3);
+    $(".temp3").text("Temp: "+ (cityGeoData.list[22].main.temp - 273.15).toFixed(2) + "°C");
+    $(".wind3").text("Wind: "+ cityGeoData.list[22].wind.speed + "KPH");
+    $(".humidity3").text("Humidity: "+ cityGeoData.list[22].main.humidity + "%");
+
+    // Day4 weather forecast html content
+    let day4 = moment(cityGeoData.list[30].dt, "X").format("DD/MM/YYYY");
+    $(".forecast-day4").text(day4);
+    $(".temp4").text("Temp: "+ (cityGeoData.list[30].main.temp - 273.15).toFixed(2) + "°C");
+    $(".wind4").text("Wind: "+ cityGeoData.list[30].wind.speed + "KPH");
+    $(".humidity4").text("Humidity: "+ cityGeoData.list[30].main.humidity + "%");
+
+    // Day5 weather forecast html content
+    let day5 = moment(cityGeoData.list[38].dt, "X").format("DD/MM/YYYY");
+    $(".forecast-day5").text(day5);
+    $(".temp5").text("Temp: "+ (cityGeoData.list[38].main.temp - 273.15).toFixed(2) + "°C");
+    $(".wind5").text("Wind: "+ cityGeoData.list[38].wind.speed + "KPH");
+    $(".humidity5").text("Humidity: "+ cityGeoData.list[38].main.humidity + "%");
 
 })
 
